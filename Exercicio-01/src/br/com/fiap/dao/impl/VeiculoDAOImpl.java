@@ -35,7 +35,7 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 	@Override
 	public void delete(int codigo) throws NotFoundException {
 		Veiculo veiculo = em.find(Veiculo.class, codigo);
-		if (veiculo != null) {
+		if (veiculo == null) {
 			throw new NotFoundException("Veiculo não cadastrado!");
 		}
 		em.remove(veiculo);

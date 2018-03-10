@@ -53,6 +53,7 @@ public class MotoristaDAOImpl implements MotoristaDAO {
 		if (mot == null) {
 			throw new NotFoundException("Motorista não cadastrado!");
 		}
+		em.remove(mot);
 
 	}
 
