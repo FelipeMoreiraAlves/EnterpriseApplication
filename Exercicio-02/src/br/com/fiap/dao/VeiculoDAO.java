@@ -4,15 +4,6 @@ import br.com.fiap.dao.exception.CommitException;
 import br.com.fiap.dao.exception.NotFoundException;
 import br.com.fiap.entity.Veiculo;
 
-public interface VeiculoDAO {
-	void create(Veiculo veiculo);
-
-	void update(Veiculo veiculo);
-
-	Veiculo find(int codigo);
-
-	void delete(int codigo) throws NotFoundException;
+public interface VeiculoDAO extends GenericDAO<Veiculo, Integer>{
 	
-	void commit() throws CommitException;
-
 }

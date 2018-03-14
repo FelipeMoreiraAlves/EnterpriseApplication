@@ -10,11 +10,11 @@ public interface GenericDAO<T,K> {
 	
 	void update(T entidade);
 	
-	void delete(K codigo);
+	void delete(K codigo) throws NotFoundException;
 	
 	T find(K codigo);
 	
-	void commit();
+	void commit() throws CommitException;
 	
 	
 
