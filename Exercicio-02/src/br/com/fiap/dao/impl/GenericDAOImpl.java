@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import br.com.fiap.dao.GenericDAO;
 import br.com.fiap.dao.exception.CommitException;
 import br.com.fiap.dao.exception.NotFoundException;
+import br.com.fiap.entity.Motorista;
 
 public class GenericDAOImpl<T, K> implements GenericDAO<T, K> {
 
@@ -61,5 +62,7 @@ public class GenericDAOImpl<T, K> implements GenericDAO<T, K> {
 			throw new CommitException("Erro ao gravar");
 		}
 	}
+
+
 
 }

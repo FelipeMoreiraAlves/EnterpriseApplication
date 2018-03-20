@@ -15,6 +15,7 @@ public interface GenericDAO<T,K> {
 	T find(K codigo);
 	
 	void commit() throws CommitException;
+
 	
 	
 
