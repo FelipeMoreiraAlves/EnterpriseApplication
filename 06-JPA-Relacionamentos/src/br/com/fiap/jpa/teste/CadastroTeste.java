@@ -1,7 +1,9 @@
 package br.com.fiap.jpa.teste;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,6 +12,7 @@ import br.com.fiap.jpa.dao.NotaFiscalDAO;
 import br.com.fiap.jpa.dao.PedidoDAO;
 import br.com.fiap.jpa.dao.impl.NotaFiscalDAOImpl;
 import br.com.fiap.jpa.dao.impl.PedidoDAOImpl;
+import br.com.fiap.jpa.entity.Imposto;
 import br.com.fiap.jpa.entity.ItemPedido;
 import br.com.fiap.jpa.entity.NotaFiscal;
 import br.com.fiap.jpa.entity.Pedido;
@@ -37,8 +40,21 @@ public class CadastroTeste {
 		
 		pedido.adicionarItem(item1);
 		pedido.adicionarItem(item2);
+		
+		Imposto imposto1 = new Imposto();
+		imposto1.setDescricao("ICMS");
+		imposto1.setValor(0.06);
+		
+		Imposto imposto2 = new Imposto();
+		imposto2.setDescricao("IOF");
+		imposto2.setValor(0.08);
+		
+		List<Imposto> impostos = new ArrayList<>();
+		impostos.add(imposto1);
+		impostos.add(imposto2);
+		
 		try {
-			//pedidoDao.inserir(pedido);
+			pedidoDao.inserir(pedido);
 			notaDao.inserir(nota);
 			notaDao.commit();
 		} catch (CommitException e) {

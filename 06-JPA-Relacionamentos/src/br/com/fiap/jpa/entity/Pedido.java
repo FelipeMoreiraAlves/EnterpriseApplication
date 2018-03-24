@@ -7,9 +7,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -34,11 +37,12 @@ public class Pedido {
 	@Column(name = "ds_pedido", nullable = false, length = 200)
 	private String descricao;
 
-	@OneToOne(mappedBy = "pedido")
+	@OneToOne(mappedBy = "pedido", fetch = FetchType.EAGER)
 	private NotaFiscal nota;
 
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
 	private List<ItemPedido> itens = new ArrayList<>();
+	
 	
 	public void adicionarItem(ItemPedido item) {
 		itens.add(item);
