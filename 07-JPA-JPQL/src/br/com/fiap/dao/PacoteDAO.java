@@ -8,7 +8,14 @@ import br.com.fiap.entity.Transporte;
 
 public interface PacoteDAO extends GenericDAO<Pacote,Integer>{
 
-	List<Pacote> buscarPorDatas(Calendar inicio, Calendar fim);
 	List<Pacote> pesquisarPorTransporte(Transporte transporte);
+	
+	List<Pacote> buscarPorDatas(Calendar inicio, Calendar fim);
+	
+	double calcularMediaPreco();
+	
+	long contarPorTransporte();
+	
+	List<Pacote> buscarPorDestino(String destino);	
 	
 }

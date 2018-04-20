@@ -9,34 +9,41 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@NamedQueries({
+		@NamedQuery(name = "Reserva.contarPorDatas", query = "select count(r) from Reserva r where r.dataReserva between"
+				+ " :inicio and :fim"),
+		@NamedQuery(name = "Reserva.contarPorEstadoCliente", query = "select count(r) from Reserva r where"
+				+ " r.cliente.endereco.cidade.uf = :uf") })
 @Entity
-@Table(name="JPA_T_RESERVA")
-@SequenceGenerator(name="seqReserva", sequenceName="SEQ_JPA_T_RESERVA", allocationSize=1)
+@Table(name = "JPA_T_RESERVA")
+@SequenceGenerator(name = "seqReserva", sequenceName = "SEQ_JPA_T_RESERVA", allocationSize = 1)
 public class Reserva {
 
 	@Id
-	@Column(name="cd_reserva")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqReserva")
+	@Column(name = "cd_reserva")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqReserva")
 	private int id;
-	
-	@Column(name="nr_dias")
+
+	@Column(name = "nr_dias")
 	private int numeroDias;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="dt_reserva")
+	@Column(name = "dt_reserva")
 	private Calendar dataReserva;
-	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Pacote pacote;
-	
+
 	@ManyToOne
 	private Cliente cliente;
-	
+
 	public Reserva(int numeroDias, Calendar dataReserva, Pacote pacote, Cliente cliente) {
 		super();
 		this.numeroDias = numeroDias;

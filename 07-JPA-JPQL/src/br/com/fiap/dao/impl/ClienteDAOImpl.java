@@ -34,15 +34,17 @@ public class ClienteDAOImpl extends GenericDAOImpl<Cliente,Integer> implements C
 	public List<Cliente> buscar(String nome, String cidade) {
 		return em.createQuery("from Cliente c where c.nome like :nome "
 				+ "and c.endereco.cidade.nome like :cid",Cliente.class)
-				.setParameter("nome", "%"+nome+"%")
-				.setParameter("cid", "%"+cidade+"%").getResultList();
+				.setParameter("nome", "%"+nome+"%" )
+				.setParameter("cid", "%"+cidade+"%")
+				.getResultList();
 	}
 
 	@Override
 	public List<Cliente> buscarPorEstados(List<String> estados) {
 		return em.createQuery("from Cliente c where "
 				+ "c.endereco.cidade.uf in :e",Cliente.class)
-				.setParameter("e", estados).getResultList();
+				.setParameter("e", estados)
+				.getResultList();
 	}
 
 }

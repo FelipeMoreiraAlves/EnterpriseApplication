@@ -7,15 +7,18 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import br.com.fiap.dao.CidadeDAO;
 import br.com.fiap.dao.ClienteDAO;
 import br.com.fiap.dao.EntityManagerFactorySingleton;
 import br.com.fiap.dao.PacoteDAO;
+import br.com.fiap.dao.ReservaDAO;
 import br.com.fiap.dao.TransporteDAO;
 import br.com.fiap.dao.impl.CidadeDAOImpl;
 import br.com.fiap.dao.impl.ClienteDAOImpl;
 import br.com.fiap.dao.impl.PacoteDAOImpl;
+import br.com.fiap.dao.impl.ReservaDAOImpl;
 import br.com.fiap.dao.impl.TransporteDAOImpl;
 import br.com.fiap.entity.Cidade;
 import br.com.fiap.entity.Cliente;
@@ -42,7 +45,7 @@ public class ConsoleView {
 		}
 		
 		System.out.println("BUSCAR POR NOME");
-		lista = cidadeDao.buscarPorNome("Lon");
+		lista = cidadeDao.buscarPorNome("lon");
 		for (Cidade cidade : lista) {
 			System.out.println(cidade.getNome() + " " +
 					cidade.getUf());
@@ -79,27 +82,25 @@ public class ConsoleView {
 			System.out.println(cliente.getNome());
 		}
 		
-		//Cria as datas para a pesquisa de inicio e fim
-		Calendar inicio = new GregorianCalendar(2015, Calendar.MAY,1);
-		Calendar fim = new GregorianCalendar(2018, Calendar.MAY,2);
+		//Cria as datas para a pesquisa
+		Calendar inicio = new GregorianCalendar(2015,Calendar.MAY,1);
+		Calendar fim = new GregorianCalendar(2018,Calendar.MAY,2);
 		//Pesquisa os pacotes por datas
 		pacotes = pacoteDao.buscarPorDatas(inicio, fim);
-		System.out.println("BUSCAR PACOTES POR DATAS ");
+		System.out.println("BUSCAR PACOTES POR DATAS");
 		//Exibe os pacotes
-		for(Pacote pacote:pacotes) {
+		for (Pacote pacote : pacotes) {
 			System.out.println(pacote.getDescricao());
 		}
-
+		
 		//Pesquisa os clientes
 		clientes = clienteDao.buscar("a", "a");
 		System.out.println("BUSCAR CLIENTE POR NOME E CIDADE");
-		
-//		Exibir os clientes
-		for(Cliente cliente : clientes) {
-			System.out.println(cliente.getNome() + " " + cliente.getEndereco()
-			.getCidade().getNome());
+		//Exibir os clientes
+		for (Cliente cliente : clientes) {
+			System.out.println(cliente.getNome() + " " +
+					cliente.getEndereco().getCidade().getNome());
 		}
-		
 		//Parametro para pesquisar os clientes por estado
 		List<String> estados = new ArrayList<>();
 		estados.add("SP");
@@ -107,11 +108,42 @@ public class ConsoleView {
 		//Pesquisar os clientes
 		clientes = clienteDao.buscarPorEstados(estados);
 		System.out.println("BUSCAR CLIENTE POR ESTADOS");
+		//Exibir os clientes
 		for (Cliente cliente : clientes) {
-			System.out.println(cliente.getNome() + " " 
-		+cliente.getEndereco().getCidade().getUf());
+			System.out.println(cliente.getNome() + " " +
+					cliente.getEndereco().getCidade().getUf());
 		}
 		
+		
+		//Criar a ReservaDAO
+		ReservaDAO reservaDao = new ReservaDAOImpl(em);
+		//Exibir a quantidade de reservas
+		System.out.println("Reservas: " + 
+						reservaDao.contarQuantidade());
+		
+		//Exibir a média dos preços dos pacotes
+		System.out.println("Preços: " + 
+						pacoteDao.calcularMediaPreco());
+		
+		//Exibir a quantidade de reserva do cliente X
+		System.out.println("Reservas do cliente: "
+				+ reservaDao.contarQuantidadePorCliente(2));
+		
+		//Exibir a quantidade de pacotes com transporte 
+		System.out.println("Pacotes com transporte: " + pacoteDao.contarPorTransporte());
+		
+		//Exibir a quantidade de reservas por data
+		Calendar inicio1 = new GregorianCalendar(2015, Calendar.JANUARY, 1);
+		System.out.println("Reservas entre as datas de inicio e fim: " + reservaDao.contarPorDatas(inicio1, 
+				fim));
+		
+		System.out.println("Quantidade de Reserva por Estados: " + reservaDao.contarPorEstadoCliente("PR"));
+		
+		pacotes = pacoteDao.buscarPorDestino("al");
+		System.out.println("Buscar os pacotes por descrição ");
+		for (Pacote pacote : pacotes) {
+			System.out.println(pacote.getDescricao());
+		}
 		
 		em.close();
 		fabrica.close();
