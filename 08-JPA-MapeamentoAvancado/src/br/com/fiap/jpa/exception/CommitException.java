@@ -1,32 +1,31 @@
-package br.com.fiap.exception;
+package br.com.fiap.jpa.exception;
 
-public class DBException extends Exception {
+public class CommitException extends Exception {
 
-	public DBException() {
+	public CommitException() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public DBException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public CommitException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub
 	}
 
-	public DBException(String message, Throwable cause) {
+	public CommitException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public DBException(String message) {
+	public CommitException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
 
-	public DBException(Throwable cause) {
+	public CommitException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	
 }

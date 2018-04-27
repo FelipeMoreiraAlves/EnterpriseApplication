@@ -3,16 +3,16 @@ package br.com.fiap.jpa.entity;
 import java.io.Serializable;
 import java.util.Calendar;
 
-//Classe que possui todos os atributos que formam a chave composta
-//obrigatório implementar Serializable
-public class ConsultaPK implements Serializable{
+//Classe que possui os atributos que formam a chave composta
+//Obrigatório implementar Serializable
+public class ConsultaPK implements Serializable {
 
 	private int medico;
 	
 	private int paciente;
 	
 	private Calendar data;
-
+	
 	public ConsultaPK(int medico, int paciente, Calendar data) {
 		super();
 		this.medico = medico;
@@ -22,7 +22,6 @@ public class ConsultaPK implements Serializable{
 
 	public ConsultaPK() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getMedico() {
@@ -79,6 +78,7 @@ public class ConsultaPK implements Serializable{
 			return false;
 		return true;
 	}
+	
 	
 	
 }

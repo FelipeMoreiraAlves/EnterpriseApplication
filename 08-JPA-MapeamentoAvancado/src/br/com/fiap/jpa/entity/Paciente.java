@@ -13,22 +13,21 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "T_PACIENTE")
-@SequenceGenerator(name = "paciente", sequenceName = "SQ_T_PACIENTE", allocationSize = 1)
+@Table(name="T_PACIENTE")
+@SequenceGenerator(name="paciente",sequenceName="SQ_T_PACIENTE",allocationSize=1)
 public class Paciente {
 
 	@Id
-	@GeneratedValue(generator="paciente", strategy=GenerationType.SEQUENCE)
 	@Column(name="cd_paciente")
+	@GeneratedValue(generator="paciente",strategy=GenerationType.SEQUENCE)
 	private int codigo;
-
+	
 	@Column(name="nm_paciente")
 	private String nome;
-
+	
 	@Column(name="dt_nascimento")
 	@Temporal(TemporalType.DATE)
 	private Calendar dataNascimento;
-
 	
 	public Paciente(String nome, Calendar dataNascimento) {
 		super();
@@ -38,7 +37,6 @@ public class Paciente {
 
 	public Paciente() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getCodigo() {
@@ -64,5 +62,5 @@ public class Paciente {
 	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
+	
 }
