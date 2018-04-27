@@ -58,10 +58,7 @@ public class Medico {
 	
 
 	public Medico(int crm, String nome, String especialidade, float salario, int contaCorrente) {
-		super();
-		this.crm = crm;
-		this.nome = nome;
-		this.especialidade = especialidade;
+		this(crm, nome, especialidade);
 		this.salario = salario;
 		this.contaCorrente = contaCorrente;
 	}
