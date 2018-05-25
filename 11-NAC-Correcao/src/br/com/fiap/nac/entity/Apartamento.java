@@ -33,8 +33,14 @@ public class Apartamento {
 	@OneToMany(mappedBy = "apartamento")
 	private List<Locacao> locacoes;
 
-	public Apartamento(String string, String string2, Object object) {
-		// TODO Auto-generated constructor stub
+	public Apartamento() {
+		
+	}
+	public Apartamento(String endereco, String detalhes, byte[] foto) {
+		super();
+		this.endereco = endereco;
+		this.detalhes = detalhes;
+		this.foto = foto;
 	}
 
 	public List<Locacao> getLocacoes() {

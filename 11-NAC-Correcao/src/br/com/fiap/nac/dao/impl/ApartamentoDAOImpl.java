@@ -1,5 +1,7 @@
 package br.com.fiap.nac.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import br.com.fiap.nac.dao.ApartamentoDAO;
@@ -12,5 +14,11 @@ public class ApartamentoDAOImpl extends GenericDAOImpl<Apartamento, Integer> imp
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	@Override
+	public List<Apartamento> buscarTodos(String descricao) {
+		// TODO Auto-generated method stub
+		return em.createQuery("from Apartamento a where a.detalhes like :d", Apartamento.class)
+				.setParameter("d", "%" + descricao + "%").getResultList();
+	}
+
 }
